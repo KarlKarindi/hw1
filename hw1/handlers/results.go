@@ -3,23 +3,24 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/karlkarindi/hw1/globals"
 	"net/http"
 )
 
-// Athlete ... person from the athletes table
+// athleteSummary is a person from the athletes table
 type athleteSummary struct {
-	id             int
-	firstname      string
-	secondname     string
-	startingnumber int
+	ID             int    `json:"id"`
+	Firstname      string `json:"firstName"`
+	Secondname     string `json:"secondName"`
+	Startingnumber int    `json:"startingNumber"`
 }
 
 type athletes struct {
 	Athletes []athleteSummary
 }
 
-// IndexHandler calls "queryAthletes()" and marshals the result as JSON
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
+// ResultsHandler calls "queryAthletes()" and marshals the result as JSON
+func ResultsHandler(w http.ResponseWriter, r *http.Request) {
 	athletes := athletes{}
 
 	err := queryAthletes(&athletes)
@@ -27,20 +28,17 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 	}
 
-	fmt.Println("Athletes successfully queried")
-
 	out, err := json.Marshal(athletes)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	fmt.Fprint(w, string(out))
+	fmt.Fprintf(w, string(out))
 }
 
 // Sends a query to return athletes from the database
 func queryAthletes(athletes *athletes) error {
-	// Database query
-	/*rows, err := Db.Query("Select id, firstname, secondname, startingnumber FROM athletes")
+	rows, err := globals.Db.Query("Select id, firstname, secondname, startingnumber FROM athletes")
 	if err != nil {
 		return err
 	}
@@ -48,10 +46,10 @@ func queryAthletes(athletes *athletes) error {
 	for rows.Next() {
 		athlete := athleteSummary{}
 		err = rows.Scan(
-			&athlete.id,
-			&athlete.firstname,
-			&athlete.secondname,
-			&athlete.startingnumber,
+			&athlete.ID,
+			&athlete.Firstname,
+			&athlete.Secondname,
+			&athlete.Startingnumber,
 		)
 		if err != nil {
 			return err
@@ -61,6 +59,6 @@ func queryAthletes(athletes *athletes) error {
 	err = rows.Err()
 	if err != nil {
 		return err
-	}*/
+	}
 	return nil
 }

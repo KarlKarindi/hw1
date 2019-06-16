@@ -3,16 +3,14 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"github.com/karlkarindi/hw1/globals"
+	"github.com/karlkarindi/hw1/handlers"
+	_ "github.com/lib/pq"
 	"log"
 	"net/http"
-
-	"github.com/karlkarindi/hw1/handlers"
-
-	_ "github.com/lib/pq"
 )
 
-// Db holds the database connection
-var Db *sql.DB
+var tempDb *sql.DB
 
 const (
 	host     = "localhost"
@@ -24,23 +22,24 @@ const (
 
 func main() {
 	initDB()
-	defer Db.Close()
-	http.HandleFunc("results.html", handlers.IndexHandler)
-	http.HandleFunc("/handlers/repo", handlers.RepoHandler)
-	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+	defer globals.Db.Close()
+	http.HandleFunc("/results", handlers.ResultsHandler)
+	log.Fatal(http.ListenAndServe("localhost:8081", nil))
 }
 
-// Set up a connection to the database.
+// Set up a connection to the database. Sets Db connection as Db in globals folder.
 func initDB() {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
-	Db, err := sql.Open("postgres", psqlInfo)
+	tempDb, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
 		panic(err)
 	}
+	globals.Db = tempDb
+	tempDb = nil
 
 	// Check if database connection is still alive.
-	err = Db.Ping()
+	err = globals.Db.Ping()
 	if err != nil {
 		panic(err)
 	}
