@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"github.com/karlkarindi/hw1/globals"
@@ -33,7 +34,11 @@ func ResultsHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	fmt.Fprintf(w, string(out))
+	fmt.Println("Posting data")
+	// fmt.Fprintf(w, string(out))
+	req, err := http.NewRequest("POST", "localhost:8081/api/results", bytes.NewBuffer(out))
+	req.Header.Set("X-Custom-Header", "myvalue")
+	req.Header.Set("Content-Type", "application/json")
 }
 
 // Sends a query to return athletes from the database
