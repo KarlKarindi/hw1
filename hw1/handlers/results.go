@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-// athleteSummary is a person from the athletes table
+// athlete is a person from the athletes table
 type athleteSummary struct {
 	ID             int    `json:"id"`
 	Firstname      string `json:"firstName"`
