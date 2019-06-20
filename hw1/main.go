@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"github.com/karlkarindi/hw1/api/handlers"
+	"github.com/karlkarindi/hw1/api"
 	"github.com/karlkarindi/hw1/globals"
 	_ "github.com/lib/pq"
 	"log"
@@ -23,7 +23,7 @@ const (
 func main() {
 	initDB()
 	defer globals.Db.Close()
-	http.HandleFunc("/api/results", handlers.ResultsHandler)
+	http.HandleFunc("/api/athletes", api.ResultsHandler)
 	log.Fatal(http.ListenAndServe("localhost:8081", nil))
 }
 
