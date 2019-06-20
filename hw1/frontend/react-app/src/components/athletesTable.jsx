@@ -17,27 +17,34 @@ class athletesTable extends Component {
       .then(json => {
         this.setState({
           loading: false,
-          athletes: Object.values(json)
+          athletes: Object.values(json)[0]
         });
       });
   }
 
   render() {
     let { loading, athletes } = this.state;
-
     console.log(athletes);
     if (loading) {
       return <div>Loading...</div>;
     } else {
       return (
-        <div className="App">
-          <ul>
-            {athletes.map(item => (
-              <li key={item}>Name: {item.firstName}</li>
+        <React.Fragment>
+          <h3 class="m-2">Competing athletes and their starting positions</h3>
+          <div className="athletesTable">
+            {athletes.map(athlete => (
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center m-2"
+                key={athlete.id}
+              >
+                {athlete.firstName} {athlete.secondName}
+                <span class="badge badge-info badge-pill m-2">
+                  {athlete.startingNumber}
+                </span>
+              </li>
             ))}
-            ;
-          </ul>
-        </div>
+          </div>
+        </React.Fragment>
       );
     }
   }
