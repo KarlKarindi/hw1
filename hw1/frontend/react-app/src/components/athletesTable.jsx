@@ -1,21 +1,45 @@
 import React, { Component } from "react";
 
 class athletesTable extends Component {
-  componentDidMount() {
-    console.log("Did mount");
-    this.getItems();
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      athletes: []
+    };
   }
 
-  getItems() {
-    console.log("Fetching data");
-    fetch("http://localhost:8081/api/results")
-      .then(results => results.json())
-      .then(results => console.log(results));
+  componentDidMount() {
+    console.log("Did mount");
+    const url = "http://localhost:8081/api/results";
+    fetch(url)
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          loading: false,
+          athletes: Object.values(json)
+        });
+      });
   }
 
   render() {
-    return null;
+    let { loading, athletes } = this.state;
+
+    console.log(athletes);
+    if (loading) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <div className="App">
+          <ul>
+            {athletes.map(item => (
+              <li key={item}>Name: {item.firstName}</li>
+            ))}
+            ;
+          </ul>
+        </div>
+      );
+    }
   }
 }
-
 export default athletesTable;

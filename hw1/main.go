@@ -3,8 +3,8 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"github.com/karlkarindi/hw1/api/handlers"
 	"github.com/karlkarindi/hw1/globals"
-	"github.com/karlkarindi/hw1/handlers"
 	_ "github.com/lib/pq"
 	"log"
 	"net/http"
@@ -23,7 +23,7 @@ const (
 func main() {
 	initDB()
 	defer globals.Db.Close()
-	http.HandleFunc("/results", handlers.ResultsHandler)
+	http.HandleFunc("/api/results", handlers.ResultsHandler)
 	log.Fatal(http.ListenAndServe("localhost:8081", nil))
 }
 
@@ -44,5 +44,5 @@ func initDB() {
 		panic(err)
 	}
 
-	fmt.Println("Connection was successful!")
+	fmt.Println("Successfully connected!")
 }

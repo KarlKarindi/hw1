@@ -1,9 +1,8 @@
 package handlers
 
 import (
-	"bytes"
 	"encoding/json"
-	"fmt"
+
 	"github.com/karlkarindi/hw1/globals"
 	"net/http"
 )
@@ -21,24 +20,17 @@ type athletes struct {
 }
 
 // ResultsHandler calls "queryAthletes()" and marshals the result as JSON
-func ResultsHandler(w http.ResponseWriter, r *http.Request) {
+func ResultsHandler(response http.ResponseWriter, request *http.Request) {
 	athletes := athletes{}
 
 	err := queryAthletes(&athletes)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(response, err.Error(), 500)
 	}
+	response.Header().Add("Content-Type", "application/json")
+	enableCors(&response)
+	json.NewEncoder(response).Encode(athletes)
 
-	out, err := json.Marshal(athletes)
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
-	fmt.Println("Posting data")
-	// fmt.Fprintf(w, string(out))
-	req, err := http.NewRequest("POST", "localhost:8081/api/results", bytes.NewBuffer(out))
-	req.Header.Set("X-Custom-Header", "myvalue")
-	req.Header.Set("Content-Type", "application/json")
 }
 
 // Sends a query to return athletes from the database
@@ -66,4 +58,8 @@ func queryAthletes(athletes *athletes) error {
 		return err
 	}
 	return nil
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
