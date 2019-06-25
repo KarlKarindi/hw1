@@ -3,7 +3,7 @@ package api
 import (
 	"encoding/json"
 
-	"github.com/karlkarindi/hw1/globals"
+	"github.com/karlkarindi/hw1/backend/globals"
 	"net/http"
 )
 
@@ -30,7 +30,6 @@ func ResultsHandler(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
 	enableCors(&response)
 	json.NewEncoder(response).Encode(athletes)
-
 }
 
 // Sends a query to return athletes from the database

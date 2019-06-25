@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/karlkarindi/hw1/api"
-	"github.com/karlkarindi/hw1/globals"
+	"github.com/karlkarindi/hw1/backend/globals"
 	_ "github.com/lib/pq"
 	"log"
 	"net/http"
@@ -19,7 +19,6 @@ const (
 	password = "mandariin"
 	dbname   = "mooncascadehw1"
 )
-
 
 func main() {
 	initDB()
