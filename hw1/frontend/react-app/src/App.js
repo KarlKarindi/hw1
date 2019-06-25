@@ -31,7 +31,7 @@ class App extends Component {
     } else {
       return (
         <React.Fragment>
-          <h1>Started lol</h1>
+          <Navbar totalRunners={6} />
           <Stopwatch />
         </React.Fragment>
       );
