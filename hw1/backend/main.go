@@ -23,7 +23,9 @@ const (
 func main() {
 	initDB()
 	defer globals.Db.Close()
-	http.HandleFunc("/api/athletes", api.ResultsHandler)
+	http.HandleFunc("/api/athletes", api.AthletesHandler)
+	//http.HandleFunc("/api/results", api.ResultsHandler)
+		//api.TimingPointsHandler
 	log.Fatal(http.ListenAndServe("localhost:8081", nil))
 }
 

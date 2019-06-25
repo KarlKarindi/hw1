@@ -10,18 +10,19 @@ import (
 // athlete is a person from the athletes table
 type athleteSummary struct {
 	ID             int    `json:"id"`
-	Firstname      string `json:"firstName"`
 	Secondname     string `json:"secondName"`
 	Startingnumber int    `json:"startingNumber"`
+	Firstname      string `json:"firstName"`
 }
 
-type athletes struct {
+// Athletes holds a list of all athletes participating in the event.
+type Athletes struct {
 	Athletes []athleteSummary
 }
 
-// ResultsHandler calls "queryAthletes()" and marshals the result as JSON
-func ResultsHandler(response http.ResponseWriter, request *http.Request) {
-	athletes := athletes{}
+// AthletesHandler calls "queryAthletes()" and marshals the result as JSON
+func AthletesHandler(response http.ResponseWriter, request *http.Request) {
+	athletes := Athletes{}
 
 	err := queryAthletes(&athletes)
 	if err != nil {
@@ -33,7 +34,7 @@ func ResultsHandler(response http.ResponseWriter, request *http.Request) {
 }
 
 // Sends a query to return athletes from the database
-func queryAthletes(athletes *athletes) error {
+func queryAthletes(athletes *Athletes) error {
 	rows, err := globals.Db.Query("Select id, firstname, secondname, startingnumber FROM athletes")
 	if err != nil {
 		return err
@@ -59,6 +60,7 @@ func queryAthletes(athletes *athletes) error {
 	return nil
 }
 
+// Enables Cors. Otherwise didn't work on localhost.
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
