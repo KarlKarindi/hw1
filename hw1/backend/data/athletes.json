@@ -1,0 +1,40 @@
+{
+ "Athletes": [
+  {
+   "id": 1,
+   "secondName": "Karindi",
+   "startingNumber": 1,
+   "firstName": "Karl Erik"
+  },
+  {
+   "id": 2,
+   "secondName": "Speederson",
+   "startingNumber": 2,
+   "firstName": "Qwik"
+  },
+  {
+   "id": 3,
+   "secondName": "Slowman",
+   "startingNumber": 3,
+   "firstName": "Bobby"
+  },
+  {
+   "id": 4,
+   "secondName": "McQueen",
+   "startingNumber": 4,
+   "firstName": "Ligt"
+  },
+  {
+   "id": 5,
+   "secondName": "Mann",
+   "startingNumber": 5,
+   "firstName": "Ronnie"
+  },
+  {
+   "id": 6,
+   "secondName": "Spitfire",
+   "startingNumber": 6,
+   "firstName": "Eddie"
+  }
+ ]
+}

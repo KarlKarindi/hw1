@@ -2,8 +2,8 @@ package api
 
 import (
 	"encoding/json"
-
 	"github.com/karlkarindi/hw1/backend/globals"
+	"io/ioutil"
 	"net/http"
 )
 
@@ -30,6 +30,7 @@ func AthletesHandler(response http.ResponseWriter, request *http.Request) {
 	}
 	response.Header().Add("Content-Type", "application/json")
 	enableCors(&response)
+
 	json.NewEncoder(response).Encode(athletes)
 }
 
@@ -63,4 +64,16 @@ func queryAthletes(athletes *Athletes) error {
 // Enables Cors. Otherwise didn't work on localhost.
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
+
+// CreateAthletesJSONFile creates a JSON file containing all the information of athletes.
+// This is used in timingpoints.go to read athletes data.
+func CreateAthletesJSONFile() {
+	athletes := Athletes{}
+	err := queryAthletes(&athletes)
+	if err != nil {
+		panic(err)
+	}
+	file, _ := json.MarshalIndent(athletes, "", " ")
+	_ = ioutil.WriteFile("backend/data/athletes.json", file, 0644)
 }
