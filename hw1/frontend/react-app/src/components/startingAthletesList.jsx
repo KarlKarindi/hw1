@@ -24,7 +24,7 @@ class StartingAthletesList extends Component {
   render() {
     let { loading, athletes } = this.state;
     if (loading) {
-      return <div>Loading...</div>;
+      return <div>Error: Server is not working...</div>;
     } else {
       return (
         <React.Fragment>

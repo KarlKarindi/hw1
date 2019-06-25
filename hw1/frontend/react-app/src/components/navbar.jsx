@@ -8,10 +8,7 @@ const Navbar = ({ totalRunners }) => {
         <span className="badge badge-pill badge-secondary m-1">
           {totalRunners}
         </span>
-        {" - "}Number of runners left{" "}
-        <span className="badge badge-pill badge-secondary m-1">
-          {totalRunners}
-        </span>
+        
       </a>
     </nav>
   );
