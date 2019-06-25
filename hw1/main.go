@@ -20,6 +20,7 @@ const (
 	dbname   = "mooncascadehw1"
 )
 
+
 func main() {
 	initDB()
 	defer globals.Db.Close()

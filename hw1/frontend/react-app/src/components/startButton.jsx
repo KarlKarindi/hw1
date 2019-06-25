@@ -1,25 +1,15 @@
 import React, { Component } from "react";
 
-class startButton extends Component {
-  state = {
-    raceStarted: false
-  };
-
-  startRace = () => {
-    const raceStarted = true;
-    console.log(raceStarted);
-    this.setState({ raceStarted });
-    console.log(this.state);
-  };
-
+class StartButton extends Component {
   render() {
+    const { onStart } = this.props;
     return (
       <div>
         <center>
           <button
             type="button"
             className="btn btn-primary m-3"
-            onClick={() => this.startRace()}
+            onClick={onStart}
           >
             Start race
           </button>
@@ -29,4 +19,4 @@ class startButton extends Component {
   }
 }
 
-export default startButton;
+export default StartButton;
