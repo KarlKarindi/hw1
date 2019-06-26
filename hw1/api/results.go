@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"math/rand"
 	"strconv"
@@ -19,41 +18,41 @@ type timingPointResults struct {
 	TimingPointResults []timingPointResultSummary
 }
 
-// TimingPointsHandler first reads in participating athletes, then
+// TimingPointsCreator first reads in participating athletes, then
 // serves the information that is sent to the server from the timing points.
-func TimingPointsHandler() {
-
+func TimingPointsCreator() {
 	file, _ := ioutil.ReadFile("backend/data/athletes.json")
 	data := Athletes{}
 	_ = json.Unmarshal([]byte(file), &data)
 
-	//timingPointResults := timingPointResults{}
-
 	// Generate new seed for random.
 	rand.Seed(time.Now().UnixNano())
-
+	timingPointResults := timingPointResults{}
+	// Cycle through all the athletes, call generateTimingPoints, Generate timingPointResultSummary-s.
 	for i := 0; i < len(data.Athletes); i++ {
 		id := data.Athletes[i].ID
 		var times = generateTimingPoints()
-		corridorTimingPoint := &timingPointResultSummary{
+		corridorTimingPoint := timingPointResultSummary{
 			AthleteID:     id,
 			TimingPointID: 0,
-			Time:          times[0] + ":" + times[1],
+			Time:          "00:" + times[0] + ":" + times[1],
 		}
 
-		finishLineTimingPoint := &timingPointResultSummary{
+		finishLineTimingPoint := timingPointResultSummary{
 			AthleteID:     id,
 			TimingPointID: 1,
-			Time:          times[2] + ":" + times[3],
+			Time:          "00:" + times[2] + ":" + times[3],
 		}
 		// timingPointResults = append(timingPoint, timingPointResults)
-		fmt.Println(corridorTimingPoint, finishLineTimingPoint)
+		timingPointResults.TimingPointResults = append(timingPointResults.TimingPointResults, corridorTimingPoint)
+		timingPointResults.TimingPointResults = append(timingPointResults.TimingPointResults, finishLineTimingPoint)
 	}
+	createTimingPointsJSONFile(timingPointResults)
 }
 
 // Array indices 0-1 are for the finish corridor and indices 2-3 for the finish line.
 // First index represents seconds, second index represents milliseconds.
-// Finish corridor times are between 7-11 seconds, finish line times between 10-17 seconds.
+// Finish corridor times are between 7-11 seconds, finish line times between 10-20 seconds.
 // It is assumed that an athlete takes at least 3 seconds to go from the corridor to the line.
 func generateTimingPoints() [4]string {
 	var times [4]string
@@ -73,7 +72,7 @@ func generateTimingPoints() [4]string {
 	times[1] = stringMilliseconds
 
 	// Finish line second and milliseconds, fixing them.
-	finishSeconds := rand.Intn(17-corridorSeconds+3) + (corridorSeconds + 3)
+	finishSeconds := rand.Intn(17-corridorSeconds) + (corridorSeconds + 3)
 	finishMilliseconds := rand.Intn(99)
 	stringSeconds = strconv.Itoa(finishSeconds)
 	stringMilliseconds = strconv.Itoa(finishMilliseconds)
@@ -87,4 +86,9 @@ func generateTimingPoints() [4]string {
 	times[3] = stringMilliseconds
 
 	return times
+}
+
+func createTimingPointsJSONFile(results timingPointResults) {
+	file, _ := json.MarshalIndent(results, "", " ")
+	_ = ioutil.WriteFile("backend/data/results.json", file, 0644)
 }

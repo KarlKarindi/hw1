@@ -1,0 +1,64 @@
+{
+ "TimingPointResults": [
+  {
+   "athleteId": 1,
+   "TimingPointID": 0,
+   "time": "00:07:83"
+  },
+  {
+   "athleteId": 1,
+   "TimingPointID": 1,
+   "time": "00:13:87"
+  },
+  {
+   "athleteId": 2,
+   "TimingPointID": 0,
+   "time": "00:07:38"
+  },
+  {
+   "athleteId": 2,
+   "TimingPointID": 1,
+   "time": "00:11:22"
+  },
+  {
+   "athleteId": 3,
+   "TimingPointID": 0,
+   "time": "00:09:25"
+  },
+  {
+   "athleteId": 3,
+   "TimingPointID": 1,
+   "time": "00:15:27"
+  },
+  {
+   "athleteId": 4,
+   "TimingPointID": 0,
+   "time": "00:07:32"
+  },
+  {
+   "athleteId": 4,
+   "TimingPointID": 1,
+   "time": "00:17:91"
+  },
+  {
+   "athleteId": 5,
+   "TimingPointID": 0,
+   "time": "00:07:58"
+  },
+  {
+   "athleteId": 5,
+   "TimingPointID": 1,
+   "time": "00:18:80"
+  },
+  {
+   "athleteId": 6,
+   "TimingPointID": 0,
+   "time": "00:08:02"
+  },
+  {
+   "athleteId": 6,
+   "TimingPointID": 1,
+   "time": "00:11:46"
+  }
+ ]
+}

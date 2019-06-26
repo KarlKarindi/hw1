@@ -29,7 +29,7 @@ func AthletesHandler(response http.ResponseWriter, request *http.Request) {
 		http.Error(response, err.Error(), 500)
 	}
 	response.Header().Add("Content-Type", "application/json")
-	enableCors(&response)
+	EnableCors(&response)
 
 	json.NewEncoder(response).Encode(athletes)
 }
@@ -61,8 +61,8 @@ func queryAthletes(athletes *Athletes) error {
 	return nil
 }
 
-// Enables Cors. Otherwise didn't work on localhost.
-func enableCors(w *http.ResponseWriter) {
+// EnableCors enables Cors. Otherwise wouldn't work on localhost.
+func EnableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
 

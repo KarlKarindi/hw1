@@ -25,8 +25,8 @@ func main() {
 	defer globals.Db.Close()
 	api.CreateAthletesJSONFile()
 	http.HandleFunc("/api/athletes", api.AthletesHandler)
+	api.TimingPointsCreator()
 	//http.HandleFunc("/api/results", api.ResultsHandler)
-	api.TimingPointsHandler()
 	log.Fatal(http.ListenAndServe("localhost:8081", nil))
 }
 
