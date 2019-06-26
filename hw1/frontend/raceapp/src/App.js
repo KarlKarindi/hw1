@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { observable } from "mobx";
+import { observer } from "mobx-react";
+import Navbar from "./components/navbar";
+import StartButton from "./components/startButton";
+import StartingAthletesList from "./components/startingAthletesList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+@observer
+class App extends Component {
+  @observable runnersAmount = 7;
+  @observable raceStarted = false;
+
+  render() {
+    if (this.raceStarted !== true) {
+      return (
+        <React.Fragment>
+          <Navbar runnersAmount={this.runnersAmount} />
+          <StartButton onClick={this.handleStartButtonClicked} />
+          <StartingAthletesList />
+        </React.Fragment>
+      );
+    } else {
+      return <div>started lol</div>;
+    }
+  }
+
+  handleStartButtonClicked = () => {
+    this.raceStarted = true;
+  };
 }
 
 export default App;
