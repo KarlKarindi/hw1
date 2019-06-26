@@ -4,18 +4,19 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"math/rand"
+	"net/http"
 	"strconv"
 	"time"
 )
 
-type timingPointResultSummary struct {
+type raceResultSummary struct {
 	AthleteID     int    `json:"athleteId"`
 	TimingPointID int    `json:"timingPointId`
 	Time          string `json:"time"`
 }
 
-type timingPointResults struct {
-	TimingPointResults []timingPointResultSummary
+type raceResults struct {
+	RaceResults []raceResultSummary
 }
 
 // TimingPointsCreator first reads in participating athletes, then
@@ -27,25 +28,26 @@ func TimingPointsCreator() {
 
 	// Generate new seed for random.
 	rand.Seed(time.Now().UnixNano())
-	timingPointResults := timingPointResults{}
+
 	// Cycle through all the athletes, call generateTimingPoints, Generate timingPointResultSummary-s.
+	timingPointResults := raceResults{}
 	for i := 0; i < len(data.Athletes); i++ {
 		id := data.Athletes[i].ID
 		var times = generateTimingPoints()
-		corridorTimingPoint := timingPointResultSummary{
+		corridorTimingPoint := raceResultSummary{
 			AthleteID:     id,
 			TimingPointID: 0,
 			Time:          "00:" + times[0] + ":" + times[1],
 		}
 
-		finishLineTimingPoint := timingPointResultSummary{
+		finishLineTimingPoint := raceResultSummary{
 			AthleteID:     id,
 			TimingPointID: 1,
 			Time:          "00:" + times[2] + ":" + times[3],
 		}
-		// timingPointResults = append(timingPoint, timingPointResults)
-		timingPointResults.TimingPointResults = append(timingPointResults.TimingPointResults, corridorTimingPoint)
-		timingPointResults.TimingPointResults = append(timingPointResults.TimingPointResults, finishLineTimingPoint)
+
+		timingPointResults.RaceResults = append(timingPointResults.RaceResults, corridorTimingPoint)
+		timingPointResults.RaceResults = append(timingPointResults.RaceResults, finishLineTimingPoint)
 	}
 	createTimingPointsJSONFile(timingPointResults)
 }
@@ -88,7 +90,19 @@ func generateTimingPoints() [4]string {
 	return times
 }
 
-func createTimingPointsJSONFile(results timingPointResults) {
+func createTimingPointsJSONFile(results raceResults) {
 	file, _ := json.MarshalIndent(results, "", " ")
 	_ = ioutil.WriteFile("backend/data/results.json", file, 0644)
+}
+
+// ResultsHandler serves results data to /api/results
+func ResultsHandler(response http.ResponseWriter, request *http.Request) {
+	file, _ := ioutil.ReadFile("backend/data/results.json")
+	results := raceResults{}
+	_ = json.Unmarshal([]byte(file), &results)
+
+	response.Header().Add("Content-Type", "application/json")
+	EnableCors(&response)
+
+	json.NewEncoder(response).Encode(results)
 }

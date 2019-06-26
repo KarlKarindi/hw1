@@ -26,7 +26,7 @@ func main() {
 	api.CreateAthletesJSONFile()
 	http.HandleFunc("/api/athletes", api.AthletesHandler)
 	api.TimingPointsCreator()
-	//http.HandleFunc("/api/results", api.ResultsHandler)
+	http.HandleFunc("/api/results", api.ResultsHandler)
 	log.Fatal(http.ListenAndServe("localhost:8081", nil))
 }
 
