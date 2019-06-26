@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { observable } from "mobx";
 import "./App.css";
 import Navbar from "./components/navbar";
 import StartingAthletesTable from "./components/startingAthletesList";
@@ -7,7 +6,6 @@ import StartButton from "./components/startButton";
 import Stopwatch from "./components/stopwatch";
 
 class App extends Component {
-  @observable
   state = {
     started: false,
     timerOn: false,

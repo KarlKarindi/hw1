@@ -35,6 +35,12 @@
    "secondName": "Spitfire",
    "startingNumber": 6,
    "firstName": "Eddie"
+  },
+  {
+   "id": 7,
+   "secondName": "Normal",
+   "startingNumber": 7,
+   "firstName": "Bob"
   }
  ]
 }

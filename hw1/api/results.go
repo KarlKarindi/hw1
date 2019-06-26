@@ -59,7 +59,7 @@ func TimingPointsCreator() {
 func generateTimingPoints() [4]string {
 	var times [4]string
 
-	// Finish corridor seconds and milliseconds, fixing them.
+	// Finish corridor seconds and milliseconds, fixing their format.
 	corridorSeconds := rand.Intn(10-7) + 7
 	corridorMilliseconds := rand.Intn(99)
 	stringSeconds := strconv.Itoa(corridorSeconds)
@@ -73,7 +73,7 @@ func generateTimingPoints() [4]string {
 	times[0] = stringSeconds
 	times[1] = stringMilliseconds
 
-	// Finish line second and milliseconds, fixing them.
+	// Finish line seconds and milliseconds, fixing their format.
 	finishSeconds := rand.Intn(17-corridorSeconds) + (corridorSeconds + 3)
 	finishMilliseconds := rand.Intn(99)
 	stringSeconds = strconv.Itoa(finishSeconds)
