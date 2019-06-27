@@ -5,21 +5,14 @@ import { observer } from "mobx-react";
 @observer
 class StartingAthletesList extends Component {
   @observable loading = true;
-  @observable athletes = [];
-
-  componentDidMount() {
-    const url = "http://localhost:8081/api/athletes";
-    fetch(url)
-      .then(response => response.json())
-      .then(json => {
-        this.loading = false;
-        this.athletes = Object.values(json)[0];
-      });
-  }
 
   render() {
-    if (this.loading === true) {
-      return <div>Loading...</div>;
+    if (this.props.athletes.length === 0) {
+      return (
+        <center>
+          <div>Loading athletes...</div>
+        </center>
+      );
     } else {
       return (
         <React.Fragment>
@@ -27,7 +20,7 @@ class StartingAthletesList extends Component {
             Competing athletes and their starting positions
           </h3>
           <div className="athletesTable m-4">
-            {this.athletes.map(athlete => (
+            {this.props.athletes.map(athlete => (
               <li
                 className="list-group-item d-flex justify-content-between align-items-center m-2"
                 key={athlete.id}
