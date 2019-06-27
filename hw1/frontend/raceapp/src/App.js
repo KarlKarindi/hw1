@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import "./css/App.css";
-import { observable } from "mobx";
+import { observable, toJS } from "mobx";
 import { observer } from "mobx-react";
 import Navbar from "./components/navbar";
 import StartButton from "./components/startButton";
 import StartingAthletesList from "./components/startingAthletesList";
 import Stopwatch from "./components/stopwatch";
-import CorridorResultsTable from "./components/corridorResultsTable";
+import ResultsTable from "./components/resultsTable";
 
 @observer
 class App extends Component {
-  @observable runnersAmount = 7;
-  @observable raceStarted = true;
+  @observable raceStarted = false;
   @observable timerOn = false;
   @observable timerTime = 0;
   @observable timerStart = 0;
@@ -34,7 +33,6 @@ class App extends Component {
         this.loading = false;
         this.athletes = Object.values(json)[0];
       });
-
   };
 
   startTimer = () => {
@@ -55,7 +53,7 @@ class App extends Component {
     if (this.raceStarted !== true) {
       return (
         <React.Fragment>
-          <Navbar runnersAmount={this.runnersAmount} />
+          <Navbar runnersAmount={toJS(this.athletes.length)} />
           <StartButton onClick={this.handleStartButtonClicked} />
           <StartingAthletesList athletes={this.athletes} />
         </React.Fragment>
@@ -66,7 +64,7 @@ class App extends Component {
       let cntsecs = ("0" + (Math.floor(this.timerTime / 10) % 100)).slice(-2);
       return (
         <React.Fragment>
-          <Navbar runnersAmount={this.runnersAmount} />
+          <Navbar runnersAmount={toJS(this.athletes.length)} />
           <div className="rowA">
             <Stopwatch
               timerTime={this.timerTime}
@@ -77,7 +75,10 @@ class App extends Component {
               cntsecs={cntsecs}
             />
             <div className="table">
-              <CorridorResultsTable athletes={this.athletes} />
+              <ResultsTable
+                athletes={this.athletes}
+                timerTime={this.timerTime}
+              />
             </div>
           </div>
         </React.Fragment>
