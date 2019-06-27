@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { observable } from "mobx";
 
 class Stopwatch extends Component {
   componentDidMount() {
     this.props.startTimer();
   }
-
   render() {
     return (
       <div className="Stopwatch m-2">

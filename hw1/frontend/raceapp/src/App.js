@@ -6,15 +6,17 @@ import Navbar from "./components/navbar";
 import StartButton from "./components/startButton";
 import StartingAthletesList from "./components/startingAthletesList";
 import Stopwatch from "./components/stopwatch";
+import CorridorResultsTable from "./components/corridorResultsTable";
 
 @observer
 class App extends Component {
   @observable runnersAmount = 7;
-  @observable raceStarted = false;
+  @observable raceStarted = true;
   @observable timerOn = false;
   @observable timerTime = 0;
   @observable timerStart = 0;
   @observable athletes = [];
+  @observable results = [];
 
   componentDidMount() {
     this.fetchAthletesFromAPI();
@@ -32,6 +34,7 @@ class App extends Component {
         this.loading = false;
         this.athletes = Object.values(json)[0];
       });
+
   };
 
   startTimer = () => {
@@ -64,14 +67,19 @@ class App extends Component {
       return (
         <React.Fragment>
           <Navbar runnersAmount={this.runnersAmount} />
-          <Stopwatch
-            timerTime={this.timerTime}
-            startTimer={this.startTimer}
-            stopTimer={this.stopTimer}
-            minutes={minutes}
-            seconds={seconds}
-            cntsecs={cntsecs}
-          />
+          <div className="rowA">
+            <Stopwatch
+              timerTime={this.timerTime}
+              startTimer={this.startTimer}
+              stopTimer={this.stopTimer}
+              minutes={minutes}
+              seconds={seconds}
+              cntsecs={cntsecs}
+            />
+            <div className="table">
+              <CorridorResultsTable athletes={this.athletes} />
+            </div>
+          </div>
         </React.Fragment>
       );
     }

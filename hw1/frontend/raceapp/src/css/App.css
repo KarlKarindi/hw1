@@ -17,6 +17,15 @@
   color: #61dafb;
 }
 
+.rowA {
+  display: flex;
+  flex-direction: row;
+}
+
+.table {
+  padding: 10px;
+}
+
 .Stopwatch {
   display: flex;
   justify-content: center;
@@ -28,6 +37,8 @@
   width: 280px;
   background-color: rgb(25, 115, 189);
   box-shadow: 0 3px 6px rgb(12, 12, 12);
+  min-width: 250px;
+  max-height: 80px;
 }
 .Stopwatch-header {
   font-size: 20px;
@@ -44,6 +55,11 @@
 }
 .Stopwatch-text {
   background-color: white;
+}
+
+.athletesTable {
+  
+  max-width: 500px;
 }
 
 @media (max-width: 900px) {
