@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { observable, toJS } from "mobx";
 import { observer } from "mobx-react";
+import ResultsList from "./resultsList";
 
 @observer
 class ResultsTable extends Component {
@@ -18,10 +19,6 @@ class ResultsTable extends Component {
     if (toJS(this.props.athletes).length > 0) {
       this.readyForRace = true;
     }
-  }
-
-  componentDidUpdate() {
-    console.log("Updated");
   }
 
   setAllIdToAthleteNames = athletesJSON => {
@@ -110,31 +107,13 @@ class ResultsTable extends Component {
       return (
         <React.Fragment>
           <div className="tableRowB">
-            <div>
-              <div className="athletesResultsTable m-5">
-                <h3 className="text-center">Finish corridor</h3>
-                {corridorResults.map(results => (
-                  <li
-                    className="list-group-item d-flex justify-content-between align-items-center m-2"
-                    key={this.getKey(toJS(this.idToResults), results)}
-                  >
-                    <b>
-                      {
-                        this.idToAthleteName[
-                          this.getKey(toJS(this.idToResults), results)
-                        ]
-                      }
-                    </b>
-                    {
-                      this.idToAthleteStartNum[
-                        this.getKey(toJS(this.idToResults), results)
-                      ]
-                    }
-                    <span className="badge badge-info badge-pill m-2" />
-                  </li>
-                ))}
-              </div>
-            </div>
+            <ResultsList
+              corridorResults={corridorResults}
+              getKey={this.getKey}
+              idToAthleteName={this.idToAthleteName}
+              idToAthleteStartNum={this.idToAthleteStartNum}
+              idToResults={this.idToResults}
+            />
             <div>
               <div className="athletesResultsTable m-5">
                 <h3 className="text-center">Finish Line</h3>
