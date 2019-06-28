@@ -61,6 +61,10 @@ class App extends Component {
         </React.Fragment>
       );
     } else {
+      if (this.timerTime > 30000) {
+        this.stopTimer();
+      }
+
       let minutes = ("0" + (Math.floor(this.timerTime / 60000) % 60)).slice(-2);
       let seconds = ("0" + (Math.floor(this.timerTime / 1000) % 60)).slice(-2);
       let cntsecs = ("0" + (Math.floor(this.timerTime / 10) % 100)).slice(-2);
