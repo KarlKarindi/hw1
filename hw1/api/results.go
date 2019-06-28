@@ -2,8 +2,8 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
-
 	"net/http"
 )
 
@@ -27,4 +27,5 @@ func ResultsHandler(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
 
 	json.NewEncoder(response).Encode(results)
+	fmt.Println(json.Unmarshal([]byte(file), &request.Body))
 }
