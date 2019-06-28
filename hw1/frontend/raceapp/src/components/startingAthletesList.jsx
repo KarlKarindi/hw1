@@ -11,6 +11,8 @@ class StartingAthletesList extends Component {
       return (
         <center>
           <div>Loading athletes...</div>
+          <div>App does not work without athletes.</div>
+          <div>If you are seeing this, the athletes have not been loaded correctly from the database.</div>
         </center>
       );
     } else {

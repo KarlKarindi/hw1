@@ -7,20 +7,37 @@ class ResultsTable extends Component {
   @observable results = [];
   @observable idToResults = {};
   @observable idToAthleteName = {};
+  @observable idToAthleteStartNum = {};
   @observable timerToDisplayableFormat = {};
   @observable readyForRace = false;
 
   componentDidMount() {
-    this.setAllIdToAthlete(toJS(this.props.athletes));
+    this.setAllIdToAthleteNames(toJS(this.props.athletes));
+    this.setAllIdToStartNums(toJS(this.props.athletes));
     this.generateTimingPoints(toJS(this.props.athletes));
-    this.readyForRace = true;
+    if (toJS(this.props.athletes).length > 0) {
+      this.readyForRace = true;
+    }
   }
 
-  setAllIdToAthlete = athletesJSON => {
+  componentDidUpdate() {
+    console.log("Updated");
+  }
+
+  setAllIdToAthleteNames = athletesJSON => {
     let i;
     for (i = 0; i < athletesJSON.length; i++) {
-      this.idToAthlete[athletesJSON[i].id] = `${athletesJSON[i].firstName} ${
-        athletesJSON[i].secondName
+      this.idToAthleteName[athletesJSON[i].id] = `${
+        athletesJSON[i].firstName
+      } ${athletesJSON[i].secondName}`;
+    }
+  };
+
+  setAllIdToStartNums = athletesJSON => {
+    let i;
+    for (i = 0; i < athletesJSON.length; i++) {
+      this.idToAthleteStartNum[athletesJSON[i].id] = `${
+        athletesJSON[i].startingNumber
       }`;
     }
   };
@@ -63,10 +80,6 @@ class ResultsTable extends Component {
     }
   };
 
-  print = () => {
-    console.log("lmao");
-  };
-
   // Shuffles athletes array so that times are given to athletes randomly.
   shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -75,6 +88,7 @@ class ResultsTable extends Component {
     }
     return array;
   }
+
   render() {
     if (this.readyForRace === true) {
       // corridorResults contains only times that the counter has gone over already.
@@ -106,12 +120,16 @@ class ResultsTable extends Component {
                   >
                     <b>
                       {
-                        this.idToAthlete[
+                        this.idToAthleteName[
                           this.getKey(toJS(this.idToResults), results)
                         ]
                       }
-                    </b>{" "}
-                    {this.timerToDisplayableFormat[results[0]]}
+                    </b>
+                    {
+                      this.idToAthleteStartNum[
+                        this.getKey(toJS(this.idToResults), results)
+                      ]
+                    }
                     <span className="badge badge-info badge-pill m-2" />
                   </li>
                 ))}
@@ -127,7 +145,7 @@ class ResultsTable extends Component {
                   >
                     <b>
                       {
-                        this.idToAthlete[
+                        this.idToAthleteName[
                           this.getKey(toJS(this.idToResults), results)
                         ]
                       }

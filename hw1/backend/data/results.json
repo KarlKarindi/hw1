@@ -3,122 +3,122 @@
   {
    "athleteId": 1,
    "TimingPointID": 0,
-   "time": "00:08:06"
+   "time": "00:09:45"
   },
   {
    "athleteId": 1,
    "TimingPointID": 1,
-   "time": "00:19:07"
+   "time": "00:12:31"
   },
   {
    "athleteId": 2,
    "TimingPointID": 0,
-   "time": "00:08:40"
+   "time": "00:07:85"
   },
   {
    "athleteId": 2,
    "TimingPointID": 1,
-   "time": "00:11:33"
+   "time": "00:10:23"
   },
   {
    "athleteId": 3,
    "TimingPointID": 0,
-   "time": "00:09:12"
+   "time": "00:08:08"
   },
   {
    "athleteId": 3,
    "TimingPointID": 1,
-   "time": "00:16:52"
+   "time": "00:18:25"
   },
   {
    "athleteId": 4,
    "TimingPointID": 0,
-   "time": "00:09:58"
+   "time": "00:09:46"
   },
   {
    "athleteId": 4,
    "TimingPointID": 1,
-   "time": "00:18:57"
+   "time": "00:12:76"
   },
   {
    "athleteId": 5,
+   "TimingPointID": 0,
+   "time": "00:09:87"
+  },
+  {
+   "athleteId": 5,
+   "TimingPointID": 1,
+   "time": "00:15:56"
+  },
+  {
+   "athleteId": 6,
    "TimingPointID": 0,
    "time": "00:09:86"
   },
   {
-   "athleteId": 5,
-   "TimingPointID": 1,
-   "time": "00:14:78"
-  },
-  {
-   "athleteId": 6,
-   "TimingPointID": 0,
-   "time": "00:08:22"
-  },
-  {
    "athleteId": 6,
    "TimingPointID": 1,
-   "time": "00:15:31"
+   "time": "00:14:53"
   },
   {
    "athleteId": 7,
    "TimingPointID": 0,
-   "time": "00:08:51"
+   "time": "00:07:80"
   },
   {
    "athleteId": 7,
    "TimingPointID": 1,
-   "time": "00:13:59"
+   "time": "00:14:66"
   },
   {
    "athleteId": 8,
    "TimingPointID": 0,
-   "time": "00:08:58"
+   "time": "00:09:47"
   },
   {
    "athleteId": 8,
    "TimingPointID": 1,
-   "time": "00:12:43"
+   "time": "00:12:40"
   },
   {
    "athleteId": 9,
    "TimingPointID": 0,
-   "time": "00:07:48"
+   "time": "00:09:82"
   },
   {
    "athleteId": 9,
    "TimingPointID": 1,
-   "time": "00:16:18"
+   "time": "00:16:84"
   },
   {
    "athleteId": 10,
    "TimingPointID": 0,
-   "time": "00:09:72"
+   "time": "00:09:63"
   },
   {
    "athleteId": 10,
    "TimingPointID": 1,
-   "time": "00:19:71"
+   "time": "00:12:34"
   },
   {
    "athleteId": 11,
    "TimingPointID": 0,
-   "time": "00:09:76"
+   "time": "00:09:26"
   },
   {
    "athleteId": 11,
    "TimingPointID": 1,
-   "time": "00:14:97"
+   "time": "00:17:16"
   },
   {
    "athleteId": 12,
    "TimingPointID": 0,
-   "time": "00:07:82"
+   "time": "00:07:08"
   },
   {
    "athleteId": 12,
    "TimingPointID": 1,
-   "time": "00:17:55"
+   "time": "00:16:85"
   }
  ]
 }

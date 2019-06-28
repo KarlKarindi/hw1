@@ -36,12 +36,14 @@ class App extends Component {
   };
 
   startTimer = () => {
-    this.timerOn = true;
-    this.timerTime = this.timerTime;
-    this.timerStart = Date.now() - this.timerTime;
-    this.timer = setInterval(() => {
-      this.timerTime = Date.now() - this.timerStart;
-    });
+    if (this.athletes.length > 0) {
+      this.timerOn = true;
+      this.timerTime = this.timerTime;
+      this.timerStart = Date.now() - this.timerTime;
+      this.timer = setInterval(() => {
+        this.timerTime = Date.now() - this.timerStart;
+      });
+    }
   };
 
   stopTimer = () => {
