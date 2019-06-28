@@ -6,7 +6,7 @@ import Navbar from "./components/navbar";
 import StartButton from "./components/startButton";
 import StartingAthletesList from "./components/startingAthletesList";
 import Stopwatch from "./components/stopwatch";
-import ResultsTable from "./components/resultsTable";
+import ResultsTables from "./components/resultsTables";
 
 @observer
 class App extends Component {
@@ -75,7 +75,7 @@ class App extends Component {
               cntsecs={cntsecs}
             />
             <div className="table">
-              <ResultsTable
+              <ResultsTables
                 athletes={this.athletes}
                 timerTime={this.timerTime}
               />
