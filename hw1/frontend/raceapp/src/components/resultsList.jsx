@@ -6,12 +6,27 @@ class ResultsList extends Component {
     if (prevProps.corridorResults.length < this.props.corridorResults.length) {
       const { corridorResults, idToResults, getKey } = this.props;
       let idOfJustEnteredCorridor = getKey(idToResults, corridorResults[0]);
-      console.log(
-        idOfJustEnteredCorridor,
-        toJS(idToResults[idOfJustEnteredCorridor])
-      );
+      let enteredCorridorTime = toJS(idToResults[idOfJustEnteredCorridor]);
+      console.log(idOfJustEnteredCorridor, enteredCorridorTime);
+
+      this.sendJSON(idOfJustEnteredCorridor, "0", enteredCorridorTime);
     }
   }
+
+  sendJSON = (idOfAthlete, idOfTimepoint, timePointValue) => {
+    fetch("http://localhost:8081/api/results", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        athleteId: idOfAthlete,
+        timepointId: idOfTimepoint,
+        time: timePointValue
+      })
+    });
+  };
 
   render() {
     const {
