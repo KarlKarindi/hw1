@@ -67,6 +67,11 @@
   max-width: 500px;
 }
 
+.athletesResultsTable {
+  min-width: 350px;
+  max-width: 500px;
+}
+
 @media (max-width: 900px) {
   .Stopwatch {
     flex-direction: column;
