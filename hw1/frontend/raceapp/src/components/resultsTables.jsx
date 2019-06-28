@@ -104,6 +104,7 @@ class ResultsTable extends Component {
               idToAthleteName={this.idToAthleteName}
               idToAthleteStartNum={this.idToAthleteStartNum}
               idToResults={this.idToResults}
+              results={this.results}
             />
             <div>
               <div className="athletesResultsTable m-5">

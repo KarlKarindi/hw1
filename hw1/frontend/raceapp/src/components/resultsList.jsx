@@ -4,9 +4,11 @@ import { toJS } from "mobx";
 class ResultsList extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.corridorResults.length < this.props.corridorResults.length) {
+      const { corridorResults, idToResults, getKey } = this.props;
+      let idOfJustEnteredCorridor = getKey(idToResults, corridorResults[0]);
       console.log(
-        "update CorridorResults length",
-        this.props.corridorResults.length
+        idOfJustEnteredCorridor,
+        toJS(idToResults[idOfJustEnteredCorridor])
       );
     }
   }
