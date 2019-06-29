@@ -46,5 +46,8 @@ func initDB() {
 		panic(err)
 	}
 
+	sqlStatement := `DROP TABLE results`
+	_, err = globals.Db.Exec(sqlStatement)
+
 	fmt.Println("Successfully connected!")
 }

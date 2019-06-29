@@ -3,30 +3,29 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 )
 
 type raceResultSummary struct {
-	AthleteID     int    `json:"athleteId"`
-	TimingPointID int    `json:"timingPointId`
-	Time          string `json:"time"`
-}
-
-type raceResults struct {
-	RaceResults []raceResultSummary
+	AthleteID   string `json:"athleteId"`
+	TimepointID string `json:"timepointId`
+	Time        string `json:"time"`
 }
 
 // ResultsHandler serves results data to /api/results
 func ResultsHandler(response http.ResponseWriter, request *http.Request) {
-
 	EnableCors(&response)
-	file, _ := ioutil.ReadFile("backend/data/results.json")
-	results := raceResults{}
-	_ = json.Unmarshal([]byte(file), &results)
 
-	response.Header().Add("Content-Type", "application/json")
+	var result raceResultSummary
+	json.NewDecoder(request.Body).Decode(&result)
 
-	json.NewEncoder(response).Encode(results)
-	fmt.Println(json.Unmarshal([]byte(file), &request.Body))
+	body := result.AthleteID + " " + result.TimepointID + " " + result.Time
+
+	// It also for some receives bodies that only contain 0.
+	// These can be filtered out with the if condition.
+	if len(body) <= 3 {
+		return
+	}
+
+	fmt.Println(body)
 }

@@ -5,18 +5,29 @@ class ResultsList extends Component {
   // Checks if anyone entered the finish corridor or crossed the finish line.
   componentDidUpdate(prevProps) {
     if (prevProps.corridorResults.length < this.props.corridorResults.length) {
-      const { corridorResults, idToResults, getKey } = this.props;
+      const {
+        corridorResults,
+        idToResults,
+        getKey,
+        timerToDisplayableFormat
+      } = this.props;
       let idOfJustEnteredCorridor = getKey(idToResults, corridorResults[0]);
-      let enteredCorridorTime = toJS(idToResults[idOfJustEnteredCorridor])[0];
+      let enteredCorridorTime =
+        timerToDisplayableFormat[toJS(idToResults[idOfJustEnteredCorridor])[0]];
 
       this.postJSON(idOfJustEnteredCorridor, "0", enteredCorridorTime);
     } else if (
       prevProps.finishResults.length < this.props.finishResults.length
     ) {
-      const { finishResults, idToResults, getKey } = this.props;
+      const {
+        finishResults,
+        idToResults,
+        getKey,
+        timerToDisplayableFormat
+      } = this.props;
       let idOfJustEnteredFinish = getKey(idToResults, finishResults[0]);
-      let enteredFinishTime = toJS(idToResults[idOfJustEnteredFinish])[1];
-
+      let enteredFinishTime =
+        timerToDisplayableFormat[toJS(idToResults[idOfJustEnteredFinish])[1]];
       this.postJSON(idOfJustEnteredFinish, "1", enteredFinishTime);
     }
   }
