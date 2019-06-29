@@ -96,40 +96,18 @@ class ResultsTable extends Component {
       });
 
       return (
-        <React.Fragment>
-          <div className="tableRowB">
-            <ResultsList
-              corridorResults={corridorResults}
-            
-              getKey={this.getKey}
-              idToAthleteName={this.idToAthleteName}
-              idToAthleteStartNum={this.idToAthleteStartNum}
-              idToResults={this.idToResults}
-              results={this.results}
-            />
-            <div>
-              <div className="athletesResultsTable m-5">
-                <h3 className="text-center">Finish Line</h3>
-                {finishResults.map(results => (
-                  <li
-                    className="list-group-item d-flex justify-content-between align-items-center m-2"
-                    key={this.getKey(toJS(this.idToResults), results)}
-                  >
-                    <b>
-                      {
-                        this.idToAthleteName[
-                          this.getKey(toJS(this.idToResults), results)
-                        ]
-                      }
-                    </b>{" "}
-                    {this.timerToDisplayableFormat[results[1]]}
-                    <span className="badge badge-info badge-pill m-2" />
-                  </li>
-                ))}
-              </div>
-            </div>
-          </div>
-        </React.Fragment>
+        <div className="tableRowB">
+          <ResultsList
+            corridorResults={corridorResults}
+            finishResults={finishResults}
+            getKey={this.getKey}
+            idToAthleteName={this.idToAthleteName}
+            idToAthleteStartNum={this.idToAthleteStartNum}
+            idToResults={this.idToResults}
+            results={this.results}
+            timerToDisplayableFormat={this.timerToDisplayableFormat}
+          />
+        </div>
       );
     } else {
       return <div>Starting race...</div>;
