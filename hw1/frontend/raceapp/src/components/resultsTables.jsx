@@ -77,7 +77,7 @@ class ResultsTable extends Component {
     }
   };
 
-  render() {
+  render() {    
     if (this.readyForRace === true) {
       // corridorResults contains only times that the counter has gone over already.
       // Then the results are sorted in descending order. Same with finishResults.

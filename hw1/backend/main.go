@@ -46,8 +46,17 @@ func initDB() {
 		panic(err)
 	}
 
-	sqlStatement := `DROP TABLE results`
+	sqlStatement := `CREATE TABLE results (
+					athleteID TEXT,
+					timingPointID TEXT,
+					time TEXT);
+					`
 	_, err = globals.Db.Exec(sqlStatement)
+	// If err != nil, then table already exists.
+	if err != nil {
+		globals.Db.Exec("DROP TABLE results")
+		globals.Db.Exec(sqlStatement)
+	}
 
 	fmt.Println("Successfully connected!")
 }

@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/karlkarindi/hw1/backend/globals"
 	"net/http"
 )
 
@@ -25,6 +26,12 @@ func ResultsHandler(response http.ResponseWriter, request *http.Request) {
 	// These can be filtered out with the if condition.
 	if len(body) <= 3 {
 		return
+	}
+
+	sqlStatement := "INSERT INTO results(athleteID, timingPointID, time) VALUES ('" + result.AthleteID + "', '" + result.TimepointID + "', '" + result.Time + "');"
+	_, err := globals.Db.Exec(sqlStatement)
+	if err != nil {
+		panic(err)
 	}
 
 	fmt.Println(body)
