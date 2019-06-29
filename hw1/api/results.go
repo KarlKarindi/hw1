@@ -19,6 +19,7 @@ type raceResults struct {
 
 // ResultsHandler serves results data to /api/results
 func ResultsHandler(response http.ResponseWriter, request *http.Request) {
+
 	EnableCors(&response)
 	file, _ := ioutil.ReadFile("backend/data/results.json")
 	results := raceResults{}

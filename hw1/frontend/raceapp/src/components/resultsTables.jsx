@@ -100,6 +100,7 @@ class ResultsTable extends Component {
           <div className="tableRowB">
             <ResultsList
               corridorResults={corridorResults}
+            
               getKey={this.getKey}
               idToAthleteName={this.idToAthleteName}
               idToAthleteStartNum={this.idToAthleteStartNum}

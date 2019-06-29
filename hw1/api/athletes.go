@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+
 	"github.com/karlkarindi/hw1/backend/globals"
 	"io/ioutil"
 	"net/http"
@@ -64,6 +65,9 @@ func queryAthletes(athletes *Athletes) error {
 // EnableCors enables Cors. Otherwise wouldn't work on localhost.
 func EnableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Credentials", "true")
+	(*w).Header().Set("Access-Control-Allow-Methods", "OPTIONS, GET, POST")
+	(*w).Header().Set("Access-Control-Allow-Headers", "Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control")
 }
 
 // func EnableCors(w *http.Req) {
