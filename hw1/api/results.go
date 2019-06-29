@@ -33,6 +33,4 @@ func ResultsHandler(response http.ResponseWriter, request *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Println(body)
 }
