@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/karlkarindi/hw1/backend/globals"
 	"net/http"
 )
@@ -28,8 +27,8 @@ func ResultsHandler(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	sqlStatement := "INSERT INTO results(athleteID, timingPointID, time) VALUES ('" + result.AthleteID + "', '" + result.TimepointID + "', '" + result.Time + "');"
-	_, err := globals.Db.Exec(sqlStatement)
+	sqlStatement := "INSERT INTO results(athleteID, timingPointID, time) VALUES ($1, $2, $3);"
+	_, err := globals.Db.Exec(sqlStatement, result.AthleteID, result.TimepointID, result.Time)
 	if err != nil {
 		panic(err)
 	}
