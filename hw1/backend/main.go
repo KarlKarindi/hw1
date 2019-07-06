@@ -12,6 +12,7 @@ import (
 
 var tempDb *sql.DB
 
+// Change according to your PostgreSQL server.
 const (
 	host     = "localhost"
 	port     = 5432
