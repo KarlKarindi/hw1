@@ -12,7 +12,10 @@ class StartingAthletesList extends Component {
         <center>
           <div>Loading athletes...</div>
           <div>App does not work without athletes.</div>
-          <div>If you are seeing this, the athletes have not been loaded correctly from the database.</div>
+          <div>
+            If you are seeing this, the athletes have not been loaded correctly
+            from the database.
+          </div>
         </center>
       );
     } else {
@@ -25,6 +28,7 @@ class StartingAthletesList extends Component {
             <div className="athletesTable m-4">
               {this.props.athletes.map(athlete => (
                 <li
+                  id="startingAthlete"
                   className="list-group-item d-flex justify-content-between align-items-center m-2"
                   key={athlete.id}
                 >

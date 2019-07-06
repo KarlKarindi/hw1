@@ -70,10 +70,6 @@ func EnableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Headers", "Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control")
 }
 
-// func EnableCors(w *http.Req) {
-// 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-//}
-
 // CreateAthletesJSONFile creates a JSON file containing all the information of athletes.
 // This is used in timingpoints.go to read athletes data.
 func CreateAthletesJSONFile() {
